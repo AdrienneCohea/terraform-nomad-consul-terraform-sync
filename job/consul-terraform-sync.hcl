@@ -1,18 +1,22 @@
 job "network-automation" {
   datacenters = ["${datacenter}"]
 
-  group "udp" {
+  group "consul-terraform-sync" {
     count = 1
 
-    task "sync" {
+    task "main" {
       driver = "docker"
 
       config {
         image = "hashicorp/consul-terraform-sync:${cts_version}"
-        args = [
-          "-config-dir",
-          "$${NOMAD_TASK_DIR}",
-        ]
+        entrypoint = ["/bin/sh"]
+        interactive = true
+        tty = true
+        dns_servers = ["127.0.0.53"]
+        #args = [
+        #  "-config-dir",
+        #  "$${NOMAD_TASK_DIR}",
+        #]
       }
 
       template {
