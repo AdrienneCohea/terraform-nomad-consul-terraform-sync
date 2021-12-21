@@ -9,14 +9,11 @@ job "network-automation" {
 
       config {
         image = "hashicorp/consul-terraform-sync:${cts_version}"
-        entrypoint = ["/bin/sh"]
-        interactive = true
-        tty = true
-        dns_servers = ["127.0.0.53"]
-        #args = [
-        #  "-config-dir",
-        #  "$${NOMAD_TASK_DIR}",
-        #]
+        dns_servers = ["169.254.1.1"]
+        args = [
+          "-config-dir",
+          "$${NOMAD_TASK_DIR}",
+        ]
       }
 
       template {
