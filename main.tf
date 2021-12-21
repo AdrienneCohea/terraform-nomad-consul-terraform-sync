@@ -3,7 +3,10 @@ resource "nomad_job" "consul_terraform_sync" {
     datacenter  = var.datacenter
     cts_version = var.cts_version
     ca_cert     = file(var.ca_cert)
-    config      = file("${path.module}/job/config.hcl")
+    config = templatefile("${path.module}/job/config.hcl", {
+      project = var.project
+      zone    = var.zone
+    })
     consul = templatefile("${path.module}/job/consul.hcl", {
       consul_token = var.consul_token
     })
