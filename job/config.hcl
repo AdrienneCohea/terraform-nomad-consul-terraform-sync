@@ -6,5 +6,6 @@ driver "terraform" {
 }
 
 terraform_provider "google" {
-  zone = "us-west1-a"
+  project = "${project}"
+  zone    = "${zone}"
 }

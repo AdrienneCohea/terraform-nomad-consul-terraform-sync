@@ -61,3 +61,13 @@ variable "cts_version" {
   type        = string
   description = "Consul-Terraform-Sync version to use (https://releases.hashicorp.com/consul-terraform-sync)"
 }
+
+variable "project" {
+  type        = string
+  description = "Google project for Terraform provider"
+}
+
+variable "zone" {
+  type        = string
+  description = "Google zone for Terraform provider"
+}
