@@ -1,5 +1,5 @@
 resource "nomad_job" "consul_terraform_sync" {
-  jobspec = templatefile("${path.module}/job/consul-terraform-sync.hcl", {
+  jobspec = templatefile("${path.module}/job.hcl", {
     datacenter  = var.datacenter
     cts_version = var.cts_version
     ca_cert     = file(var.ca_cert)
