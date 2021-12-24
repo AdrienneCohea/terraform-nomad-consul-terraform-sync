@@ -63,6 +63,16 @@ ${ca_cert}
 
         destination = "local/ca.pem"
       }
+
+      template {
+        data = <<EOH
+{{ with secret "gcp/roleset/consul-terraform-sync/key" }}
+{{ .Data.private_key_data | base64Decode }}
+{{ end }}
+        EOH
+
+        destination = "local/credentials"
+      }
     }
   }
 }
