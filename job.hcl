@@ -26,6 +26,14 @@ ${config}
 
       template {
         data = <<EOH
+${provider}
+        EOH
+
+        destination = "local/provider.hcl"
+      }
+
+      template {
+        data = <<EOH
 ${consul}
         EOH
 
@@ -54,15 +62,6 @@ ${ca_cert}
         EOH
 
         destination = "local/ca.pem"
-      }
-
-      template {
-        data = <<EOH
-{{ with secret "gcp/roleset/consul-terraform-sync/key" }}
-{{ .Data.private_key_data | base64Decode }}
-{{ end }}
-        EOH
-        destination = "local/credentials.json"
       }
     }
   }

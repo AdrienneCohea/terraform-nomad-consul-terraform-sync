@@ -1,8 +1,8 @@
 consul {
-  address = "https://consul.service.consul:8501"
+  address = "${address}"
   tls {
     enabled = true
     ca_cert = "/local/ca.pem"
   }
-  token = "${consul_token}"
+  token = "${token}"
 }

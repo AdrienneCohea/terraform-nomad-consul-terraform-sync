@@ -3,12 +3,14 @@ resource "nomad_job" "consul_terraform_sync" {
     datacenter  = var.datacenter
     cts_version = var.cts_version
     ca_cert     = file(var.ca_cert)
-    config = templatefile("${path.module}/job/config.hcl", {
+    config      = templatefile("${path.module}/job/config.hcl", {})
+    provider = templatefile("${path.module}/job/provider.hcl", {
       project = var.project
       zone    = var.zone
     })
     consul = templatefile("${path.module}/job/consul.hcl", {
-      consul_token = var.consul_token
+      address = var.consul.address
+      token   = var.consul.token
     })
     tasks = templatefile("${path.module}/job/tasks.hcl", {
       name           = var.task_name
@@ -23,4 +25,6 @@ resource "nomad_job" "consul_terraform_sync" {
       managed_zone = var.managed_zone
     })
   })
+
+  purge_on_destroy = true
 }

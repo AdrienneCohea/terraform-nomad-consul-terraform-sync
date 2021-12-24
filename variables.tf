@@ -71,3 +71,10 @@ variable "zone" {
   type        = string
   description = "Google zone for Terraform provider"
 }
+
+variable "consul" {
+  type = object({
+    address = string
+    token   = string
+  })
+}
